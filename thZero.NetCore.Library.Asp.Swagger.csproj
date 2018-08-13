@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace>thZero.AspNetCore</RootNamespace>
+		<AssemblyName>thZero.NetCore.Library.Asp.Swagger</AssemblyName>
+		<PackageId>thZero.NetCore.Library.Asp.Swagger</PackageId>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+		<PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0.txt</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/thZero.NetCore.Library.Asp.Swagger</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/thZero.NetCore.Library.Asp.Swagger</RepositoryUrl>
+		<RepositoryType>GitHub</RepositoryType>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<Authors>thZero.com</Authors>
+		<Copyright></Copyright>
+		<Description />
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\thZero.NetCore.Library\CommonAssemblyInfo.cs" Link="CommonAssemblyInfo.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="2.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="2.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="2.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="2.2.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\thZero.NetCore.Library\thZero.NetCore.Library.csproj" />
+		<ProjectReference Include="..\thZero.NetCore.Library.Asp\thZero.NetCore.Library.Asp.csproj" />
+	</ItemGroup>
+
+</Project>
