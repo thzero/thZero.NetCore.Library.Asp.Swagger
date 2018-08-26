@@ -33,8 +33,10 @@ namespace thZero.AspNetCore
 		#region Public Methods
 		public void Apply(Operation operation, OperationFilterContext context)
 		{
-			var authAttributes = context.ApiDescription.ControllerAttributes()
-				.Union(context.ApiDescription.ActionAttributes())
+            System.Reflection.MethodInfo methodInfo = null;
+            context.ApiDescription.TryGetMethodInfo(methodInfo);
+			var authAttributes = methodInfo.GetCustomAttributes(true)
+                .Union(context.ApiDescription.ActionAttributes())
 				.OfType<AuthorizeAttribute>();
 
 			if (authAttributes.Any())
