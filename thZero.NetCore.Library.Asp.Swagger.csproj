@@ -8,6 +8,7 @@
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
 		<PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0.txt</PackageLicenseUrl>
 		<PackageProjectUrl>https://github.com/thZero.NetCore.Library.Asp.Swagger</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/thZero.NetCore.Library.Asp.Swagger</RepositoryUrl>
@@ -15,7 +16,6 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<Authors>thZero.com</Authors>
-		<Copyright></Copyright>
 		<Description />
 		<Version>1.0.0</Version>
 	</PropertyGroup>
