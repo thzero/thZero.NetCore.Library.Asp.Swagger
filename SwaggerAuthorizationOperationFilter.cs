@@ -33,13 +33,14 @@ namespace thZero.AspNetCore
 		#region Public Methods
 		public void Apply(Operation operation, OperationFilterContext context)
 		{
+            // https://github.com/domaindrivendev/Swashbuckle.AspNetCore#operation-filters
             System.Reflection.MethodInfo methodInfo = null;
-            context.ApiDescription.TryGetMethodInfo(methodInfo);
-			var authAttributes = methodInfo.GetCustomAttributes(true)
-                .Union(context.ApiDescription.ActionAttributes())
-				.OfType<AuthorizeAttribute>();
+            context.ApiDescription.TryGetMethodInfo(out methodInfo);
+            var authAttributes = context.MethodInfo.DeclaringType.GetCustomAttributes(true)
+                .Union(context.MethodInfo.GetCustomAttributes(true))
+                .OfType<AuthorizeAttribute>();
 
-			if (authAttributes.Any())
+            if (authAttributes.Any())
 				operation.Responses.Add(HttpStatusCode.Unauthorized.ToString(), new Response { Description = Status401 });
 		}
 		#endregion
