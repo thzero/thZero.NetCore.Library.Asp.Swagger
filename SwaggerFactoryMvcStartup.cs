@@ -31,7 +31,8 @@ using thZero.Configuration;
 
 namespace thZero.AspNetCore
 {
-	public abstract class SwaggerFactoryMvcStartup<TApplicationConfiguration, TApplicationConfigurationDefaults, TApplicationConfigurationEmail> :
+    [Obsolete("SwaggerFactoryMvcStartup is deprecated, please use SwaggerStartupExtension instead.")]
+    public abstract class SwaggerFactoryMvcStartup<TApplicationConfiguration, TApplicationConfigurationDefaults, TApplicationConfigurationEmail> :
 		FactoryMvcStartup<TApplicationConfiguration, TApplicationConfigurationDefaults, TApplicationConfigurationEmail>
 		where TApplicationConfiguration : Application<TApplicationConfigurationDefaults, TApplicationConfigurationEmail>, new()
 		where TApplicationConfigurationDefaults : ApplicationDefaults
@@ -47,18 +48,18 @@ namespace thZero.AspNetCore
 			base.ConfigureInitialize(app, env, loggerFactory, svp);
 
 			app.UseSwagger();
-			app.UseSwaggerUI(options => InitializeSwaggerUI(options));
+			app.UseSwaggerUI(options => ConfigureServicesInitializeSwaggerUI(options));
 		}
 
 		protected override void ConfigureServicesInitializeMvcPost(IServiceCollection services)
 		{
 			base.ConfigureServicesInitializeMvcPost(services);
 
-			services.AddSwaggerGen(options => InitializeSwaggerGen(options));
+			services.AddSwaggerGen(options => ConfigureServicesInitializeSwaggerGen(options));
 		}
 
-		protected abstract void InitializeSwaggerGen(SwaggerGenOptions options);
-		protected abstract void InitializeSwaggerUI(SwaggerUIOptions options);
+		protected abstract void ConfigureServicesInitializeSwaggerGen(SwaggerGenOptions options);
+		protected abstract void ConfigureServicesInitializeSwaggerUI(SwaggerUIOptions options);
 		#endregion
 	}
 }
