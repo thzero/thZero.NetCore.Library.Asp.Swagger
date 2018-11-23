@@ -34,13 +34,21 @@ namespace thZero.AspNetCore
     public abstract class SwaggerStartupExtension : IStartupExtension
     {
         #region Public Methods
-        public virtual void ConfigureInitializePost(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
+        public virtual void ConfigurePost(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
+        {
+        }
+
+        public virtual void ConfigurePre(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
+        {
+        }
+
+        public virtual void ConfigureInitializePost(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
         {
             app.UseSwagger();
             app.UseSwaggerUI(options => ConfigureServicesInitializeSwaggerUI(options));
         }
 
-        public virtual void ConfigureInitializePre(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
+        public virtual void ConfigureInitializePre(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
         {
         }
 
@@ -72,12 +80,20 @@ namespace thZero.AspNetCore
         {
         }
 
-        public virtual void ConfigureServicesMvcPost(IServiceCollection services, IConfigurationRoot configuration)
+        public virtual void ConfigureServicesPost(IServiceCollection services, IConfigurationRoot configuration)
+        {
+        }
+
+        public virtual void ConfigureServicesPre(IServiceCollection services, IConfigurationRoot configuration)
+        {
+        }
+
+        public virtual void ConfigureServicesInitializeMvcPost(IServiceCollection services, IConfigurationRoot configuration)
         {
             services.AddSwaggerGen(options => ConfigureServicesInitializeSwaggerGen(options));
         }
 
-        public virtual void ConfigureServicesMvcPre(IServiceCollection services, IConfigurationRoot configuration)
+        public virtual void ConfigureServicesInitializeMvcPre(IServiceCollection services, IConfigurationRoot configuration)
         {
         }
         #endregion
