@@ -1,5 +1,5 @@
-thZero.NetCore.Library.AutoMapper
-Copyright (C) 2016-2017 thZero.com
+thZero.NetCore.Library.Asp.Swagger
+Copyright (C) 2016-2018 thZero.com
 
 <development [at] thzero [dot] com>
 
