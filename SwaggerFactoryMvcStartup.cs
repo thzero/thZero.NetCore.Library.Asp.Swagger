@@ -20,6 +20,7 @@ limitations under the License.
 using System;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -32,15 +33,16 @@ using thZero.Configuration;
 namespace thZero.AspNetCore
 {
     [Obsolete("SwaggerFactoryMvcStartup is deprecated, please use SwaggerStartupExtension instead.")]
-    public abstract class SwaggerFactoryMvcStartup<TApplicationConfiguration, TApplicationConfigurationDefaults, TApplicationConfigurationEmail> :
-		FactoryMvcStartup<TApplicationConfiguration, TApplicationConfigurationDefaults, TApplicationConfigurationEmail>
+    public abstract class SwaggerFactoryMvcStartup<TApplicationConfiguration, TApplicationConfigurationDefaults, TApplicationConfigurationEmail, TStartup> :
+		FactoryMvcStartup<TApplicationConfiguration, TApplicationConfigurationDefaults, TApplicationConfigurationEmail, TStartup>
 		where TApplicationConfiguration : Application<TApplicationConfigurationDefaults, TApplicationConfigurationEmail>, new()
 		where TApplicationConfigurationDefaults : ApplicationDefaults
 		where TApplicationConfigurationEmail : ApplicationEmail
-	{
-		protected SwaggerFactoryMvcStartup(IHostingEnvironment env, string copyrightDate) : base(env, copyrightDate)
-		{
-		}
+        where TStartup : BaseMvcStartup
+    {
+        public SwaggerFactoryMvcStartup(string copyrightDate, IConfiguration configuration, ILogger<TStartup> logger) : base(copyrightDate, configuration, logger)
+        {
+        }
 
 		#region Protected Methods
 		protected override void ConfigureInitialize(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
