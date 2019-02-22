@@ -21,8 +21,6 @@ using System;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -32,95 +30,29 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace thZero.AspNetCore
 {
-    public abstract class SwaggerStartupExtension : IStartupExtension
+    public abstract class SwaggerStartupExtension : BaseStartupExtension
     {
         #region Public Methods
-        public virtual void ConfigurePost(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
+        public override void ConfigureInitializePost(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
         {
-        }
+            base.ConfigureInitializePost(app, env, loggerFactory, svp);
 
-        public virtual void ConfigurePre(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
-        {
-        }
-
-        public virtual void ConfigureInitializePost(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
-        {
             app.UseSwagger();
             app.UseSwaggerUI(options => ConfigureServicesInitializeSwaggerUI(options));
         }
 
-        public virtual void ConfigureInitializePre(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
+        public override void ConfigureServicesInitializeMvcBuilderPre(IMvcCoreBuilder builder)
         {
-        }
+            base.ConfigureServicesInitializeMvcBuilderPre(builder);
 
-        public virtual void ConfigureInitializeFinalPre(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
-        {
-        }
-
-        public virtual void ConfigureInitializeFinalPost(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
-        {
-        }
-
-        public virtual void ConfigureInitializeRoutesBuilderPost(IRouteBuilder routes)
-        {
-        }
-
-        public virtual void ConfigureInitializeRoutesBuilderPre(IRouteBuilder routes)
-        {
-        }
-
-        public virtual void ConfigureInitializeSsl(IApplicationBuilder app)
-        {
-        }
-
-        public virtual void ConfigureInitializeStaticPost(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
-        {
-        }
-
-        public virtual void ConfigureInitializeStaticPre(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
-        {
-        }
-
-        public virtual void ConfigureServicesPost(IServiceCollection services, IConfiguration configuration)
-        {
-        }
-
-        public virtual void ConfigureServicesPre(IServiceCollection services, IConfiguration configuration)
-        {
-        }
-
-        public virtual void ConfigureServicesInitializeMvcBuilderPost(IMvcBuilder builder)
-        {
-        }
-
-        public virtual void ConfigureServicesInitializeMvcBuilderPre(IMvcBuilder builder)
-        {
-        }
-
-        public virtual void ConfigureServicesInitializeMvcBuilderPost(IMvcCoreBuilder builder)
-        {
-        }
-
-        public virtual void ConfigureServicesInitializeMvcBuilderPre(IMvcCoreBuilder builder)
-        {
             builder.AddApiExplorer();
         }
 
-        public virtual void ConfigureServicesInitializeMvcOptionsPost(MvcOptions options)
+        public override void ConfigureServicesInitializeMvcPost(IServiceCollection services, IHostingEnvironment env, IConfiguration configuration)
         {
-        }
+            base.ConfigureServicesInitializeMvcPost(services, env, configuration);
 
-        public virtual void ConfigureServicesInitializeMvcOptionsPre(MvcOptions options)
-        {
-        }
-
-        public virtual void ConfigureServicesInitializeMvcPost(IServiceCollection services, IConfiguration configuration)
-        {
             services.AddSwaggerGen(options => ConfigureServicesInitializeSwaggerGen(options));
-        }
-
-        public virtual void ConfigureServicesInitializeMvcPre(IServiceCollection services, IConfiguration configuration)
-        {
         }
         #endregion
 
