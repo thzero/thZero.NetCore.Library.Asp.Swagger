@@ -50,7 +50,7 @@ namespace thZero.AspNetCore
 			base.ConfigureInitialize(app, env, loggerFactory, svp);
 
 			app.UseSwagger();
-			app.UseSwaggerUI(options => ConfigureServicesInitializeSwaggerUI(options));
+			app.UseSwaggerUI(options => ConfigureInitializeSwaggerUI(options));
 		}
 
 		protected override void ConfigureServicesInitializeMvcPost(IServiceCollection services)
@@ -61,7 +61,7 @@ namespace thZero.AspNetCore
 		}
 
 		protected abstract void ConfigureServicesInitializeSwaggerGen(SwaggerGenOptions options);
-		protected abstract void ConfigureServicesInitializeSwaggerUI(SwaggerUIOptions options);
+		protected abstract void ConfigureInitializeSwaggerUI(SwaggerUIOptions options);
 		#endregion
 	}
 }

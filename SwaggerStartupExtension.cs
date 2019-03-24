@@ -38,7 +38,7 @@ namespace thZero.AspNetCore
             base.ConfigureInitializePost(app, env, loggerFactory, svp);
 
             app.UseSwagger();
-            app.UseSwaggerUI(options => ConfigureServicesInitializeSwaggerUI(options));
+            app.UseSwaggerUI(options => ConfigureInitializeSwaggerUI(options));
         }
 
         public override void ConfigureServicesInitializeMvcBuilderPre(IMvcCoreBuilder builder)
@@ -58,7 +58,7 @@ namespace thZero.AspNetCore
 
         #region Protected Methods
         protected abstract void ConfigureServicesInitializeSwaggerGen(SwaggerGenOptions options);
-        protected abstract void ConfigureServicesInitializeSwaggerUI(SwaggerUIOptions options);
+        protected abstract void ConfigureInitializeSwaggerUI(SwaggerUIOptions options);
 
         protected void SwaggerEndpoint(SwaggerUIOptions options, string name, string type, string root = "swagger", string document = "swagger.json")
         {
