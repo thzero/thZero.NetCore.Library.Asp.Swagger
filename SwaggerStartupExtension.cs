@@ -1,6 +1,6 @@
 ﻿/* ------------------------------------------------------------------------- *
 thZero.NetCore.Library.Asp.Swagger
-Copyright (C) 2016-2019 thZero.com
+Copyright (C) 2016-2021 thZero.com
 
 <development [at] thzero [dot] com>
 
@@ -17,23 +17,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
  * ------------------------------------------------------------------------- */
 
-using System;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
 
 namespace thZero.AspNetCore
 {
     public abstract class SwaggerStartupExtension : BaseStartupExtension
     {
         #region Public Methods
-        public override void ConfigureInitializePost(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
+        public override void ConfigureInitializePost(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, IServiceProvider svp)
         {
             base.ConfigureInitializePost(app, env, loggerFactory, svp);
 
@@ -48,7 +46,7 @@ namespace thZero.AspNetCore
             builder.AddApiExplorer();
         }
 
-        public override void ConfigureServicesInitializeMvcPost(IServiceCollection services, IHostingEnvironment env, IConfiguration configuration)
+        public override void ConfigureServicesInitializeMvcPost(IServiceCollection services, IWebHostEnvironment env, IConfiguration configuration)
         {
             base.ConfigureServicesInitializeMvcPost(services, env, configuration);
 
@@ -62,7 +60,7 @@ namespace thZero.AspNetCore
 
         protected void SwaggerEndpoint(SwaggerUIOptions options, string name, string type, string root = "swagger", string document = "swagger.json")
         {
-            options.SwaggerEndpoint(string.Concat(Seperator, root , Seperator, type, Seperator, document), name);
+            options.SwaggerEndpoint(string.Concat(Seperator, root, Seperator, type, Seperator, document), name);
         }
         #endregion
 

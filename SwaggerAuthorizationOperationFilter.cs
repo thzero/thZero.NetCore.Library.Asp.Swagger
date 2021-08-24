@@ -1,6 +1,6 @@
 ﻿/* ------------------------------------------------------------------------- *
 thZero.NetCore.Library.Asp.Swagger
-Copyright (C) 2016-2019 thZero.com
+Copyright (C) 2016-2021 thZero.com
 
 <development [at] thzero [dot] com>
 
@@ -17,36 +17,34 @@ See the License for the specific language governing permissions and
 limitations under the License.
  * ------------------------------------------------------------------------- */
 
-using System;
 using System.Linq;
 using System.Net;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.OpenApi.Models;
 
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace thZero.AspNetCore
 {
-	public sealed class SwaggerAuthorizationOperationFilter : IOperationFilter
-	{
-		#region Public Methods
-		public void Apply(Operation operation, OperationFilterContext context)
-		{
+    public sealed class SwaggerAuthorizationOperationFilter : IOperationFilter
+    {
+        #region Public Methods
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
+        {
             // https://github.com/domaindrivendev/Swashbuckle.AspNetCore#operation-filters
-            System.Reflection.MethodInfo methodInfo = null;
-            context.ApiDescription.TryGetMethodInfo(out methodInfo);
+            context.ApiDescription.TryGetMethodInfo(out _);
             var authAttributes = context.MethodInfo.DeclaringType.GetCustomAttributes(true)
                 .Union(context.MethodInfo.GetCustomAttributes(true))
                 .OfType<AuthorizeAttribute>();
 
             if (authAttributes.Any())
-				operation.Responses.Add(HttpStatusCode.Unauthorized.ToString(), new Response { Description = Status401 });
-		}
-		#endregion
+                operation.Responses.Add(HttpStatusCode.Unauthorized.ToString(), new OpenApiResponse { Description = Status401 });
+        }
+        #endregion
 
-		#region Constants
-		private const string Status401 = "Unauthorized";
-		#endregion
-	}
+        #region Constants
+        private const string Status401 = "Unauthorized";
+        #endregion
+    }
 }
